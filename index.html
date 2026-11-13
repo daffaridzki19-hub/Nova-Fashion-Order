@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nova Fashion — Limited Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js"></script>
+<style>
+:root{--bg:#090a0d;--panel:#111318;--panel2:#171a20;--line:#2b2e36;--silver:#c9cbd1;--muted:#9296a1;--white:#f6f6f7;--accent:#d9dbe1;--danger:#b95e68;--ok:#8fae9a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#30333d 0%,#111319 38%,#090a0d 75%);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:0 22px}.top{height:76px;border-bottom:1px solid #ffffff16;display:flex;align-items:center;justify-content:space-between}.brand{font:600 23px 'Playfair Display';letter-spacing:2px}.brand span{color:#aeb2bc}.nav{display:flex;gap:10px}.btn{border:1px solid #555963;background:transparent;color:var(--white);padding:11px 16px;border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase}.btn.primary{background:#d7d9df;color:#111;border-color:#d7d9df;font-weight:700}.btn:disabled{opacity:.4;cursor:not-allowed}.hero{padding:76px 0 50px;text-align:center}.eyebrow{color:#b8bbc4;letter-spacing:4px;font-size:10px;text-transform:uppercase}.hero h1{font:600 clamp(40px,7vw,76px)/1.05 'Playfair Display';margin:17px 0}.hero p{color:var(--muted);max-width:560px;margin:0 auto;line-height:1.8;font-size:14px}.rule{display:inline-block;border:1px solid #ffffff30;padding:9px 14px;margin-top:25px;color:#c5c7ce;font-size:11px;letter-spacing:1px}.section-head{display:flex;justify-content:space-between;align-items:end;margin:30px 0 18px}.section-head h2{font:500 28px 'Playfair Display';margin:0}.count{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding-bottom:70px}.product{border:1px solid var(--line);background:linear-gradient(145deg,#171a20,#0f1116);border-radius:6px;overflow:hidden}.photo{height:260px;background:#20232a;display:grid;place-items:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.placeholder{color:#737782;font:16px 'Playfair Display';letter-spacing:2px}.pinfo{padding:16px}.pname{font:19px 'Playfair Display';margin:0 0 7px}.pid{font-size:10px;color:var(--muted);letter-spacing:1px}.status{display:inline-block;margin:13px 0 14px;padding:6px 9px;border:1px solid #8fae9a66;color:#a8c4b1;font-size:9px;letter-spacing:1.4px}.status.sold{border-color:#b95e6877;color:#d78a91}.claim{width:100%}.empty{padding:45px;text-align:center;border:1px dashed var(--line);color:var(--muted);grid-column:1/-1}.foot{border-top:1px solid #ffffff16;padding:25px 0;color:#777b85;font-size:10px;letter-spacing:1px;text-align:center}.modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:18px;z-index:5}.modal.show{display:grid}.dialog{width:min(440px,100%);background:#14171d;border:1px solid #444852;padding:25px;border-radius:6px}.dialog h3{font:24px 'Playfair Display';margin:0 0 8px}.dialog p{color:var(--muted);font-size:12px;line-height:1.6}.field{display:grid;gap:7px;margin:15px 0}.field label{font-size:10px;color:#bfc2ca;letter-spacing:1px;text-transform:uppercase}.field input,.field textarea{width:100%;background:#0b0d11;color:white;border:1px solid #3a3e48;padding:12px;border-radius:3px;outline:none}.field input:focus,.field textarea:focus{border-color:#aeb2bc}.actions{display:flex;gap:9px;margin-top:18px}.actions>*{flex:1}.notice{font-size:12px;margin-top:12px;min-height:18px;color:#d8d9de}.admin{display:none;padding:28px 0 70px}.admin.show{display:block}.adminbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.admin h2{font:28px 'Playfair Display'}.adminbox{background:#12151b;border:1px solid var(--line);padding:18px;margin:18px 0;border-radius:5px}.adminbox h3{font:20px 'Playfair Display';margin:0 0 12px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.wide{grid-column:1/-1}.adminlist{width:100%;border-collapse:collapse;font-size:12px}.adminlist th,.adminlist td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top}.adminlist th{color:#9da1ab;font-size:9px;letter-spacing:1px;text-transform:uppercase}.smallbtn{padding:7px 9px;font-size:9px;margin:2px}.hidden{display:none!important}
+@media(max-width:620px){.hero{padding:55px 0 35px}.formgrid{grid-template-columns:1fr}.wide{grid-column:auto}.photo{height:235px}.adminlist{font-size:10px}.adminlist th,.adminlist td{padding:9px 5px}.brand{font-size:19px}}
+</style></head>
+<body>
+<header class="top wrap"><div class="brand">NOVA <span>FASHION</span></div><div class="nav"><button class="btn" id="homeBtn">Collection</button><button class="btn" id="adminBtn">Admin</button></div></header>
+<main class="wrap" id="publicView">
+<section class="hero"><div class="eyebrow">Curated • Exclusive • Limited</div><h1>Own Your<br>Signature Look.</h1><p>Discover the Nova Fashion limited collection. Every design is available for one participant only. Once claimed, it will no longer be available.</p><div class="rule">ONE PARTICIPANT · ONE PRODUCT · FOREVER YOURS</div></section>
+<div class="section-head"><h2>The Collection</h2><div class="count" id="productCount">Loading collection…</div></div>
+<div class="grid" id="products"><div class="empty">Menghubungkan ke koleksi…</div></div>
+</main>
+<section class="wrap admin" id="adminView">
+<div class="adminbar"><div><div class="eyebrow">Management Studio</div><h2>Admin Dashboard</h2></div><button class="btn" id="logoutBtn">Log out</button></div>
+<div id="loginPanel" class="adminbox"><h3>Admin Sign In</h3><div class="formgrid"><div class="field"><label>Email admin</label><input id="email" type="email" autocomplete="username"></div><div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password"></div></div><button class="btn primary" id="loginBtn">Sign in</button><div class="notice" id="loginMsg"></div></div>
+<div id="managePanel" class="hidden">
+<div class="adminbox"><h3 id="formTitle">Add New Product</h3><input id="editId" type="hidden"><div class="formgrid"><div class="field"><label>Product name</label><input id="pname" placeholder="Example: Silver Elegance"></div><div class="field"><label>Roblox Clothing ID</label><input id="clothingId" placeholder="ID produk"></div><div class="field wide"><label>Dress photo (upload from device)</label><input id="photoFile" type="file" accept="image/*"></div></div><div class="actions"><button class="btn primary" id="saveProduct">Save product</button><button class="btn" id="cancelEdit">Clear</button></div><div class="notice" id="productMsg"></div></div>
+<div class="adminbox"><h3>Product Inventory</h3><div style="overflow:auto"><table class="adminlist"><thead><tr><th>Product</th><th>Clothing ID</th><th>Status</th><th>Claimed by</th><th>Action</th></tr></thead><tbody id="inventory"></tbody></table></div></div>
+<div class="adminbox"><h3>Claim Records</h3><div style="overflow:auto"><table class="adminlist"><thead><tr><th>Roblox Username</th><th>Product</th><th>Clothing ID</th><th>Claimed at</th></tr></thead><tbody id="claims"></tbody></table></div></div>
+</div></section>
+<div class="modal" id="claimModal"><div class="dialog"><h3>Claim Your Design</h3><p id="claimProductText">Isi Roblox Username kamu untuk mengklaim produk ini.</p><div class="field"><label>Roblox Username</label><input id="robloxUsername" maxlength="32" placeholder="Masukkan username Roblox"></div><div class="actions"><button class="btn primary" id="confirmClaim">Confirm Claim</button><button class="btn" id="closeClaim">Cancel</button></div><div class="notice" id="claimMsg"></div></div></div>
+<div class="wrap foot">NOVA FASHION · LIMITED EDITION COLLECTION · FREE CLAIM · RP 0</div>
+<script>
+const cfg=window.NOVA_CONFIG||{};
+const client=(window.supabase&&cfg.url&&cfg.anonKey&&!cfg.url.includes("YOUR_"))?window.supabase.createClient(cfg.url,cfg.anonKey):null;
+let products=[],selected=null,session=null;
+const $=id=>document.getElementById(id);
+function msg(id,t){$(id).textContent=t||''}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function ready(){if(!client){$('products').innerHTML='<div class="empty">Website belum dihubungkan ke database. Admin perlu menyelesaikan langkah setup pada README sebelum website dipublikasikan.</div>';$('productCount').textContent='Setup required';return false}return true}
+async function loadProducts(){
+ if(!ready())return;
+ const {data,error}=await client.from('products').select('*').order('created_at',{ascending:false});
+ if(error){$('products').innerHTML='<div class="empty">Gagal memuat koleksi. Periksa konfigurasi database.</div>';return}
+ products=data||[];renderProducts();
+}
+function renderProducts(){
+ $('productCount').textContent=`${products.length} DESIGNS · ${products.filter(p=>p.status==='available').length} AVAILABLE`;
+ $('products').innerHTML=products.length?products.map(p=>`<article class="product"><div class="photo">${p.image_url?`<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}">`:'<div class="placeholder">NOVA</div>'}</div><div class="pinfo"><h3 class="pname">${escapeHtml(p.name)}</h3><div class="pid">${p.status==='claimed'?'CLOTHING ID · '+escapeHtml(p.clothing_id||'—'):'CLOTHING ID · Revealed after claim'}</div><div class="status ${p.status==='claimed'?'sold':''}">${p.status==='claimed'?'TAKEN · SOLD OUT':'AVAILABLE'}</div><button class="btn primary claim" ${p.status!=='available'?'disabled':''} data-claim="${p.id}">${p.status==='claimed'?'NO LONGER AVAILABLE':'CLAIM THIS DESIGN'}</button></div></article>`).join(''):'<div class="empty">Belum ada produk. Nantikan koleksi Nova Fashion.</div>';
+ document.querySelectorAll('[data-claim]').forEach(b=>b.addEventListener('click',()=>openClaim(b.dataset.claim)));
+}
+function openClaim(id){selected=products.find(p=>p.id===id);if(!selected||selected.status!=='available')return;$('claimProductText').textContent=`Kamu akan mengklaim “${selected.name}”. Setiap Roblox Username hanya dapat memiliki satu produk.`;$('robloxUsername').value='';msg('claimMsg','');$('claimModal').classList.add('show')}
+$('closeClaim').onclick=()=>$('claimModal').classList.remove('show');
+$('confirmClaim').onclick=async()=>{
+ if(!client||!selected)return;const username=$('robloxUsername').value.trim();
+ if(!/^[A-Za-z0-9_]{3,20}$/.test(username)){msg('claimMsg','Masukkan Roblox Username yang valid (3–20 karakter).');return}
+ $('confirmClaim').disabled=true;msg('claimMsg','Memproses klaim…');
+ const {data,error}=await client.rpc('claim_product',{p_product_id:selected.id,p_roblox_username:username});
+ $('confirmClaim').disabled=false;
+ if(error){msg('claimMsg','Klaim gagal: '+error.message);return}
+ if(!data?.success){msg('claimMsg',data?.message||'Produk tidak tersedia.');await loadProducts();return}
+ msg('claimMsg',`ORDER BERHASIL! Clothing ID kamu: ${selected.clothing_id||'Belum diisi admin'}`);
+ await loadProducts();
+};
+$('adminBtn').onclick=()=>{ $('publicView').classList.add('hidden');$('adminView').classList.add('show');checkSession()};
+$('homeBtn').onclick=()=>{ $('adminView').classList.remove('show');$('publicView').classList.remove('hidden')};
+async function checkSession(){
+ if(!client){$('loginMsg').textContent='Database belum dikonfigurasi. Ikuti README.';return}
+ const {data}=await client.auth.getSession();session=data.session;
+ $('loginPanel').classList.toggle('hidden',!!session);$('managePanel').classList.toggle('hidden',!session);$('logoutBtn').classList.toggle('hidden',!session);
+ if(session)await loadAdmin();
+}
+$('loginBtn').onclick=async()=>{msg('loginMsg','Signing in…');const {error}=await client.auth.signInWithPassword({email:$('email').value,password:$('password').value});msg('loginMsg',error?error.message:'');if(!error)await checkSession()};
+$('logoutBtn').onclick=async()=>{await client.auth.signOut();await checkSession()};
+async function loadAdmin(){
+ const [{data:p},{data:c}]=await Promise.all([client.from('products').select('*').order('created_at',{ascending:false}),client.from('claims').select('*,products(name,clothing_id)').order('claimed_at',{ascending:false})]);
+ const claimByProduct=new Map((c||[]).map(x=>[x.product_id,x.roblox_username]));
+ $('inventory').innerHTML=(p||[]).map(x=>`<tr><td>${escapeHtml(x.name)}</td><td>${escapeHtml(x.clothing_id||'—')}</td><td>${x.status==='claimed'?'TAKEN':'AVAILABLE'}</td><td>${escapeHtml(claimByProduct.get(x.id)||'—')}</td><td><button class="btn smallbtn" data-edit="${x.id}">Edit</button><button class="btn smallbtn" data-delete="${x.id}">Delete</button></td></tr>`).join('');
+ $('claims').innerHTML=(c||[]).map(x=>`<tr><td>${escapeHtml(x.roblox_username)}</td><td>${escapeHtml(x.products?.name||'—')}</td><td>${escapeHtml(x.products?.clothing_id||'—')}</td><td>${new Date(x.claimed_at).toLocaleString('id-ID')}</td></tr>`).join('')||'<tr><td colspan="4">Belum ada klaim.</td></tr>';
+ document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editProduct(p.find(x=>x.id===b.dataset.edit)));
+ document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteProduct(b.dataset.delete));
+}
+function editProduct(p){$('editId').value=p.id;$('pname').value=p.name;$('clothingId').value=p.clothing_id||'';$('formTitle').textContent='Edit Product';window.scrollTo({top:0,behavior:'smooth'})}
+$('cancelEdit').onclick=()=>{$('editId').value='';$('pname').value='';$('clothingId').value='';$('photoFile').value='';$('formTitle').textContent='Add New Product';msg('productMsg','')};
+$('saveProduct').onclick=async()=>{
+ const name=$('pname').value.trim(),clothing_id=$('clothingId').value.trim(),id=$('editId').value,file=$('photoFile').files[0];
+ if(!name){msg('productMsg','Nama produk wajib diisi.');return}
+ let image_url=null;
+ if(file){if(file.size>5*1024*1024){msg('productMsg','Ukuran foto maksimal 5 MB.');return}
+ const path=`${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'_')}`;
+ const up=await client.storage.from('product-images').upload(path,file,{upsert:false});
+ if(up.error){msg('productMsg','Upload foto gagal: '+up.error.message);return}
+ image_url=client.storage.from('product-images').getPublicUrl(path).data.publicUrl;
+ }
+ const payload={name,clothing_id};if(image_url)payload.image_url=image_url;
+ const result=id?await client.from('products').update(payload).eq('id',id):await client.from('products').insert(payload);
+ msg('productMsg',result.error?result.error.message:'Produk berhasil disimpan.');
+ if(!result.error){$('cancelEdit').click();await loadAdmin();await loadProducts()}
+};
+async function deleteProduct(id){if(!confirm('Hapus produk ini? Produk yang sudah diklaim tidak dapat dihapus.'))return;const {error}=await client.from('products').delete().eq('id',id);if(error)alert(error.message);else{await loadAdmin();await loadProducts()}}
+if(client){client.auth.onAuthStateChange(()=>checkSession());loadProducts()}else ready();
+</script></body></html>
